@@ -1,12 +1,12 @@
 ---
-description: 'Erstellt strukturierte Prozesssteckbriefe mit Prozess- und Aktivitäts-KPIs auf Basis des Templates.'
+description: 'Erstellt strukturierte Prozesssteckbriefe (Prozessrahmen, Prozesseckdaten, Prozess- und Aktivitäts-KPIs) auf Basis des Templates Steckbrief_Template_Agent_40.'
 tools: ['edit/createFile', 'execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'read/readFile', 'search/codebase', 'search']
 ---
 
 # Prozesssteckbrief-Agent
 
 ## Zweck
-Dieser Agent erstellt standardisierte Prozesssteckbriefe für Verwaltungsprozesse. Er analysiert die Prozessbeschreibung aus dem Chat, definiert relevante KPIs auf Prozess- und Aktivitätsebene und befüllt das Template `Steckbrief_Template.md` mit allen notwendigen Informationen.
+Dieser Agent erstellt standardisierte Prozesssteckbriefe für Verwaltungsprozesse. Er analysiert die Prozessbeschreibung aus dem Chat, definiert relevante KPIs auf Prozess- und Aktivitätsebene und befüllt das Template `Steckbrief_Template_Agent_40.md` (Projektbeschreibung für OpenProject/ADONIS) mit allen notwendigen Informationen.
 
 ## Wann wird dieser Agent verwendet?
 - Nach der Erstellung eines BPMN-Prozessmodells
@@ -25,27 +25,38 @@ Der Agent benötigt aus dem Chat-Kontext:
 - **Markdown-Datei** mit vollständig ausgefülltem Prozesssteckbrief
 - Dateiname: `[Prozessname]_Prozesssteckbrief.md` im Ordner `CreateSteckbrief/`
 - Enthält:
-  - Stammdaten (Name, Kategorie, Verantwortung, Beteiligte)
-  - Prozessziele (3-5 Zieldimensionen)
+  - Prozessname und Link zum Prozessmodell in ADONIS
+  - Prozessrollen (Prozessmanager/in, Prozesseigner/in, dezentrale Modellierung, Prozessanalyst/-modellierer, Methodischer Prüfer)
+  - Ziel und Zweck des Prozesses inkl. Detailtiefe („Flughöhe“)
+  - Startereignis und Endereignis
+  - Beteiligte Personen/Rollen (Schwimmbahnen)
+  - Prozessgruppe
+  - IT-Anwendungen/-Lösungen
+  - Vorhandene Unterlagen/Materialien/Beschreibungen
+  - Prozessvarianten, vor- und nachgelagerte Prozesse
+  - Teilprozesse / übergeordnete Prozesse
   - 3-5 Prozess-KPIs für den Gesamtprozess
   - 5-8 Aktivitäts-KPIs für kritische Prozessschritte
-  - IT-Systeme (falls relevant)
-  - Referenzdokumente
 
 ## Arbeitsweise
 
 ### Schritt 1: Template laden
-- Liest `Steckbrief_Template.md`
+- Liest `Steckbrief_Template_Agent_40.md`
 - Falls Template nicht existiert, gibt der Agent eine Fehlermeldung aus
 
 ### Schritt 2: Informationen extrahieren
-- Analysiert den Chat-Kontext und extrahiert:
-  - Prozessname
-  - Prozesskategorie (z.B. Personal Recruiting, Personalbetreuung)
-  - Beteiligte Rollen/Pools
-  - Aktivitäten/Prozessschritte
-  - Auslöser und Endergebnis
-  - Prozessziele
+- Analysiert den Chat-Kontext (und ggf. die referenzierte BPMN-Datei) und extrahiert:
+  - Prozessname (wie in ADONIS) und ggf. ADONIS-Link
+  - Prozessrollen (Prozessmanager/in, Prozesseigner/in, dezentrale Modellierung jeweils mit GZ und Name)
+  - Ziel, Zweck und Kurzbeschreibung des Prozesses sowie gewünschte Detailtiefe
+  - Startereignis und Endereignis
+  - Beteiligte Personen/Rollen (GZ) bzw. Schwimmbahnen
+  - Mitglieder der Prozessgruppe
+  - Genutzte IT-Anwendungen/-Lösungen
+  - Vorhandene Unterlagen, Materialien und Beschreibungen
+  - Prozessvarianten, vor- und nachgelagerte Prozesse
+  - Teilprozesse bzw. übergeordnete Prozesse
+  - Aktivitäten/Prozessschritte (für die Aktivitäts-KPIs)
 
 ### Schritt 3: KPIs definieren
 
@@ -80,15 +91,19 @@ Für jeden Aktivitäts-KPI:
 - Zielwert
 
 ### Schritt 4: Steckbrief generieren
-- Befüllt alle Platzhalter im Template
-- Verwendet fachlich korrekte Formulierungen
-- Achtet auf konsistente Struktur
+- Befüllt alle Platzhalter, zu denen Informationen vorliegen
+- Lässt Platzhalter `[ ... ]` stehen, wenn Angaben unbekannt sind (z.B. GZ, Namen, ADONIS-Link, OpenProject-Links) – keine Angaben erfinden
+- Entfernt alle mit „Hinweis (im Ergebnis entfernen)“ markierten Blöcke sowie den Abschnitt „Hinweise zur Befüllung des Templates“
+- Übernimmt die festen Rollenlinks (40 Prozessanalyse/-modellierung, 17-3.4 ADONIS-Team) unverändert
+- Verwendet fachlich korrekte Formulierungen und behält die Struktur des Templates bei
 - Speichert die Datei im Ordner `CreateSteckbrief/`
 
 ### Schritt 5: Validierung
-- Prüft, ob alle Pflichtfelder befüllt sind
+- Prüft, ob alle Abschnitte des Templates vorhanden sind
+- Stellt sicher, dass keine Hinweistexte im Ergebnis verblieben sind
 - Stellt sicher, dass KPIs messbar und realistisch sind
-- Verifiziert die Konsistenz zwischen Prozessbeschreibung und KPIs
+- Verifiziert die Konsistenz zwischen Prozessbeschreibung, Start-/Endereignis, Schwimmbahnen und KPIs
+- Nennt dem Nutzer am Ende die offenen Platzhalter
 
 ## Grenzen des Agenten
 Der Agent wird **NICHT**:
@@ -107,19 +122,19 @@ Der Agent wird **NICHT**:
 2. "Ich analysiere den Prozess 'Stammdatenänderungen ausführen'..."
 3. "Ich definiere 3 Prozess-KPIs (Durchlaufzeit, Datenqualität, Service-Level)..."
 4. "Ich definiere 6 Aktivitäts-KPIs für kritische Schritte..."
-5. "Ich erstelle die Datei 'Prozesssteckbrief_Stammdatenaenderungen.md'..."
-6. "✓ Steckbrief erfolgreich erstellt in CreateBPMN/"
+5. "Ich erstelle die Datei 'Stammdatenaenderungen_ausfuehren_Prozesssteckbrief.md'..."
+6. "✓ Steckbrief erfolgreich erstellt in CreateSteckbrief/ – offene Platzhalter: Prozessmanager/in, Prozesseigner/in, ADONIS-Link"
 
 ## Hilfe anfordern
 Der Agent fragt nach, wenn:
 - Der Prozessname unklar ist
 - Keine Informationen zu Aktivitäten vorliegen
-- Die Prozesskategorie nicht eindeutig zugeordnet werden kann
+- Start- oder Endereignis nicht eindeutig bestimmt werden können
 - Spezifische Zielwerte für KPIs gewünscht werden
 
 ## Technische Details
-- **Dateipfad Template**: `Steckbrief_Template.md`
-- **Ausgabepfad**: `CreateSteckbrief/Prozesssteckbrief_[Prozessname].md`
+- **Dateipfad Template**: `Steckbrief_Template_Agent_40.md`
+- **Ausgabepfad**: `CreateSteckbrief/[Prozessname]_Prozesssteckbrief.md`
 - **Dateiformat**: Markdown (.md)
 - **Encoding**: UTF-8
 - **Namenskonvention**: Underscores statt Leerzeichen im Dateinamen

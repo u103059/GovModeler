@@ -72,7 +72,7 @@ Diese Dokumentation beschreibt die technischen Grundlagen und Voraussetzungen zu
 2. Aktivität im BPMN-Modell benennen für das ein Formular erstellt werden soll
 
 ## Prozesssteckbrief-Generierung mit Copilot Chat
-1. Agent "Steckbrief" auswählen
+1. Agent "Steckbrief_Agent_40" auswählen
 2. Erstellung über Prompt anstoßen, z. B. "Erstelle Steckbrief"
 
 ## Troubleshooting

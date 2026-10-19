@@ -1,0 +1,371 @@
+{
+  "components": [
+    {
+      "text": "## Anmeldung an weiterfuehrender Schule",
+      "type": "text",
+      "id": "Field_Titel",
+      "layout": {
+        "row": "Row_0"
+      }
+    },
+    {
+      "text": "Bitte machen Sie die Angaben zum Kind und zu den Sorgeberechtigten und bestaetigen Sie, dass die erforderlichen Unterlagen beigefuegt sind.",
+      "type": "text",
+      "id": "Field_Hinweis",
+      "layout": {
+        "row": "Row_0"
+      }
+    },
+    {
+      "label": "Angaben zum Kind",
+      "type": "group",
+      "id": "Field_Group_Kind",
+      "layout": {
+        "row": "Row_1"
+      }
+    },
+    {
+      "label": "Vorname des Kindes",
+      "type": "textfield",
+      "id": "Field_Kind_Vorname",
+      "key": "kindVorname",
+      "validate": {
+        "required": true,
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "layout": {
+        "row": "Row_2",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Nachname des Kindes",
+      "type": "textfield",
+      "id": "Field_Kind_Nachname",
+      "key": "kindNachname",
+      "validate": {
+        "required": true,
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "layout": {
+        "row": "Row_2",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Geburtsdatum des Kindes",
+      "type": "textfield",
+      "id": "Field_Kind_Geburtsdatum",
+      "key": "kindGeburtsdatum",
+      "description": "Format: TT.MM.JJJJ",
+      "validate": {
+        "required": true,
+        "pattern": "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[012])\\.(19|20)\\d\\d$"
+      },
+      "layout": {
+        "row": "Row_3",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Geburtsort des Kindes",
+      "type": "textfield",
+      "id": "Field_Kind_Geburtsort",
+      "key": "kindGeburtsort",
+      "validate": {
+        "required": true,
+        "maxLength": 50
+      },
+      "layout": {
+        "row": "Row_3",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Strasse und Hausnummer",
+      "type": "textfield",
+      "id": "Field_Kind_Strasse",
+      "key": "kindStrasse",
+      "validate": {
+        "required": true,
+        "minLength": 3,
+        "maxLength": 100
+      },
+      "layout": {
+        "row": "Row_4",
+        "columns": 8
+      }
+    },
+    {
+      "label": "PLZ",
+      "type": "textfield",
+      "id": "Field_Kind_PLZ",
+      "key": "kindPlz",
+      "validate": {
+        "required": true,
+        "pattern": "^[0-9]{5}$"
+      },
+      "layout": {
+        "row": "Row_5",
+        "columns": 4
+      }
+    },
+    {
+      "label": "Ort",
+      "type": "textfield",
+      "id": "Field_Kind_Ort",
+      "key": "kindOrt",
+      "validate": {
+        "required": true,
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "layout": {
+        "row": "Row_5",
+        "columns": 8
+      }
+    },
+    {
+      "label": "Bisherige Grundschule",
+      "type": "textfield",
+      "id": "Field_Grundschule",
+      "key": "bisherigeGrundschule",
+      "validate": {
+        "required": true,
+        "maxLength": 100
+      },
+      "layout": {
+        "row": "Row_6"
+      }
+    },
+    {
+      "label": "Angaben zu den Sorgeberechtigten",
+      "type": "group",
+      "id": "Field_Group_Sorgeberechtigte",
+      "layout": {
+        "row": "Row_7"
+      }
+    },
+    {
+      "label": "Vorname",
+      "type": "textfield",
+      "id": "Field_Vorname",
+      "key": "vorname",
+      "validate": {
+        "required": true,
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "layout": {
+        "row": "Row_8",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Nachname",
+      "type": "textfield",
+      "id": "Field_Nachname",
+      "key": "nachname",
+      "validate": {
+        "required": true,
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "layout": {
+        "row": "Row_8",
+        "columns": 6
+      }
+    },
+    {
+      "label": "E-Mail",
+      "type": "textfield",
+      "id": "Field_Email",
+      "key": "email",
+      "validate": {
+        "required": true,
+        "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+      },
+      "layout": {
+        "row": "Row_9",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Telefonnummer",
+      "type": "textfield",
+      "id": "Field_Telefon",
+      "key": "telefon",
+      "validate": {
+        "required": false,
+        "maxLength": 30
+      },
+      "layout": {
+        "row": "Row_9",
+        "columns": 6
+      }
+    },
+    {
+      "label": "Gewuenschte Schule",
+      "type": "group",
+      "id": "Field_Group_Schule",
+      "layout": {
+        "row": "Row_10"
+      }
+    },
+    {
+      "label": "Gewuenschte weiterfuehrende Schule",
+      "type": "textfield",
+      "id": "Field_Wunschschule",
+      "key": "wunschschule",
+      "validate": {
+        "required": true,
+        "maxLength": 100
+      },
+      "layout": {
+        "row": "Row_11",
+        "columns": 8
+      }
+    },
+    {
+      "label": "Schulart",
+      "type": "select",
+      "id": "Field_Schulart",
+      "key": "schulart",
+      "values": [
+        {
+          "label": "Bitte auswaehlen",
+          "value": ""
+        },
+        {
+          "label": "Werkrealschule / Hauptschule",
+          "value": "werkrealschule"
+        },
+        {
+          "label": "Realschule",
+          "value": "realschule"
+        },
+        {
+          "label": "Gymnasium",
+          "value": "gymnasium"
+        },
+        {
+          "label": "Gemeinschaftsschule",
+          "value": "gemeinschaftsschule"
+        },
+        {
+          "label": "Sonstige",
+          "value": "sonstige"
+        }
+      ],
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "Row_11",
+        "columns": 4
+      }
+    },
+    {
+      "label": "Zusaetzliche Angaben",
+      "type": "textarea",
+      "id": "Field_Zusatzangaben",
+      "key": "zusatzangaben",
+      "description": "Optional, z. B. Hinweise zum Kind oder Zweitwunsch",
+      "validate": {
+        "required": false,
+        "maxLength": 500
+      },
+      "layout": {
+        "row": "Row_12"
+      }
+    },
+    {
+      "label": "Nachweise",
+      "type": "group",
+      "id": "Field_Group_Nachweise",
+      "layout": {
+        "row": "Row_13"
+      }
+    },
+    {
+      "text": "**Folgende Unterlagen werden mit der Anmeldung eingereicht:**\n- Grundschulempfehlung\n- Geburtsurkunde des Kindes\n- Nachweis des Wohnsitzes",
+      "type": "text",
+      "id": "Field_Nachweise_Info",
+      "layout": {
+        "row": "Row_14"
+      }
+    },
+    {
+      "label": "Ich habe die erforderlichen Nachweise digital beigefuegt",
+      "type": "checkbox",
+      "id": "Field_Nachweise_Bestaetigung",
+      "key": "nachweiseBeigefuegt",
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "Row_15"
+      }
+    },
+    {
+      "label": "Datenschutz und Einwilligung",
+      "type": "group",
+      "id": "Field_Group_Datenschutz",
+      "layout": {
+        "row": "Row_16"
+      }
+    },
+    {
+      "text": "Mit der Anmeldung willige ich in die Verarbeitung der personenbezogenen Daten meines Kindes und meiner eigenen Daten gemaess der Datenschutzgrundverordnung (DSGVO) ein. Die Daten werden ausschliesslich zur Bearbeitung der Schulanmeldung verwendet.",
+      "type": "text",
+      "id": "Field_Datenschutz_Text",
+      "layout": {
+        "row": "Row_17"
+      }
+    },
+    {
+      "label": "Ich habe die Datenschutzhinweise gelesen und akzeptiert",
+      "type": "checkbox",
+      "id": "Field_Datenschutz_Akzeptiert",
+      "key": "datenschutzAkzeptiert",
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "Row_18"
+      }
+    },
+    {
+      "label": "Ich bestatige die Richtigkeit meiner Angaben",
+      "type": "checkbox",
+      "id": "Field_Richtigkeit_Bestaetigt",
+      "key": "richtigkeitBestaetigt",
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "Row_19"
+      }
+    },
+    {
+      "label": "Anmeldung einreichen",
+      "type": "button",
+      "id": "Field_Submit",
+      "action": "submit",
+      "layout": {
+        "row": "Row_20"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_Schule_anmelden",
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "exporter": {
+    "name": "GitHub-Copilot-GovModeler",
+    "version": "2.0"
+  },
+  "schemaVersion": 9
+}
