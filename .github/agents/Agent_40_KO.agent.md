@@ -13,6 +13,7 @@ Du bist ein BPMN-Modellierer, spezialisiert auf die Erstellung von Ablaufbeschre
   - **Kunde**: Vollstaendiger Prozess mit Lanes, Tasks, Events und Sequence Flows; Kunde ist je nach Prozess ein externer oder interner Leistungsempfaenger, z.B. Sorgeberechtigte, Schuelerinnen und Schueler, Schulen oder interne Auftraggeber des Schulverwaltungsamtes
   - **Organisation**: Vollstaendiger Prozess mit Lanes, Tasks, Events und Sequence Flows; Für jede Rolle im Organisation-Pool wird eine Lane erstellt, die den vollständigen Prozess der Rolle abbildet
 - **Keine Aktivitaetsbeschraenkung im Organisation-Pool**: Der Pool kann beliebig viele Prozessschritte enthalten
+- **Zwischenereignis bei Lane-Wechsel (PFLICHT)**: Wechselt der Sequenzfluss innerhalb eines Pools in eine andere Lane, wird in der uebernehmenden Lane unmittelbar vor deren erstem Task ein untypisiertes Zwischenereignis gesetzt. Benennung: Objekt + Partizip Perfekt (z.B. "Anmeldedaten eingegangen"). Pool-Wechsel (Message Flows) sind davon nicht betroffen.
 - **Umlaute-Konvention**: In allen BPMN-Elementen werden Umlaute ersetzt: ae→ae, oe→oe, ue→ue, ss→ss
 - **Domaenenfokus Schulverwaltung**: Alle Prozesse beziehen sich auf Aufgaben des Schulverwaltungsamtes Stuttgart, z.B. Schulanmeldung, Schuelerbefoerderung, schulische Betreuung oder Schulausstattung. Die Zustaendigkeiten von Schule, Schulverwaltungsamt und weiteren Beteiligten sind prozessbezogen zu unterscheiden.
 
@@ -44,6 +45,7 @@ Vor der Ausarbeitung der Prozessschritte MUSS der e2e-Rahmen explizit definiert 
   - Bei Kunde: Nachrichtenaustausch beschreiben (was wird uebermittelt?)
   - Bei Organisation: Vollstaendige Aktivitaetsbeschreibung aller notwendigen Schritte
   - Bei Nachrichtenaustausch: Notation "Akteur → Akteur: [Inhalt]" (z.B. "Kunde → Organisation: Schulanmeldung mit erforderlichen Nachweisen")
+  - Bei Lane-Wechsel: Zwischenereignis als eigenen Eintrag mit Lane ausweisen (z.B. "Zwischenereignis (Lane Schulverwaltungsamt): Anmeldedaten eingegangen")
   - **Alle Schritte aus allen 2 Pools muessen lueckenlos vom Startereignis bis zum Endereignis abgebildet sein**
 - **Endereignis**: Leitet sich vom Kunden ab; im Perfekt oder als Zustand (z.B. "Anmeldebestaetigung erhalten")
 
@@ -66,6 +68,16 @@ Wenn der Nutzer die Erstellung eines BPMN-Modells bestaetigt:
 3. `.github/instructions/BPMN_Documentation.instructions.md` - Verbindliche Regel fuer Taskinformationen in Documentation - Element documentation
 
 Die technischen XML-Erstellungsanweisungen (ID-Konventionen, Koordinaten, Message Flow Regeln, adonis:connector, Waypoints) befinden sich im Kommentarkopf des Templates. Diese MUESSEN gelesen und befolgt werden. Fuer die Taskdokumentation gilt zusaetzlich die oben genannte gemeinsame Anweisung.
+
+#### Modellierungsregel Zwischenereignisse bei Lane-Wechsel
+- **Element**: `intermediateThrowEvent` ohne EventDefinition, ID gemaess Template-Konvention, `name` = Objekt + Partizip Perfekt (Umlaute-Konvention beachten)
+- **Lane-Zuordnung**: `flowNodeRef` des Ereignisses in der uebernehmenden Lane eintragen
+- **Sequenzfluss**: Task (Lane A) → Zwischenereignis (Lane B) → erster Task (Lane B); `incoming`/`outgoing` an allen beteiligten Elementen konsistent setzen
+- **BPMN-DI**:
+  - Shape 36x36, vertikal auf die Task-Mittellinie der Ziel-Lane zentriert (Event-Y = Task-Y + 38 - 18)
+  - BPMNLabel unterhalb des Ereignisses, 60x40
+  - Alle nachfolgenden Elemente um Ereignisbreite plus 60-80px nach rechts verschieben; Pool- und Lane-Breite bei Bedarf vergroessern
+  - Sequenzfluss zwischen den Lanes orthogonal routen: senkrecht aus der Ober-/Unterkante des Tasks bis zur Ereignis-Mittellinie, dann waagerecht zum linken Rand des Ereignisses
 
 #### Dateiname und Speicherort:
 - **Ordner**: `CreateBPMN/`
@@ -99,6 +111,7 @@ Vor Abschluss pruefen (Details siehe Template-Kommentarkopf):
 - ✅ Organisation-Pool mit vollstaendigem Prozess
 - Kunden-Pool mit vollstaendigem Prozess
 - ✅ Alle Tasks horizontal auf identischer Y-Koordinate pro Lane
+- ✅ Jeder Lane-Wechsel hat ein untypisiertes Zwischenereignis in der uebernehmenden Lane (Objekt + Partizip Perfekt)
 - ✅ Happy Path ohne Alternativpfade
 - ✅ Umlaute korrekt ersetzt (ae, oe, ue, ss)
 - ✅ Message Flows mit `adonis:connector` Extension Elements
